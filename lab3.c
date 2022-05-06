@@ -13,8 +13,8 @@ typedef struct{
    float max; 
 } tArgs;
 
-/*Dividindo a Tarefa intercalando as threads pulando nthreads posicoes ate a proxima posiçao a ser checada no vetor dai são feitos
-os 2 testes para checar se ela é maior ou menor que todas as outras nesse bloco tid+n*nthreads */
+/*Dividindo a Tarefa em blocos de N/nthreads posicoes e comparando elas achando o maior e menor entre elas e retornando eles para a chamada
+pthread_join */
 void *tarefa(void *arg) {
    tArgs *args = (tArgs*) arg;
    long int id = (long int) args->id;
