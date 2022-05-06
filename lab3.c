@@ -18,6 +18,8 @@ pthread_join */
 void *tarefa(void *arg) {
    tArgs *args = (tArgs*) arg;
    long int id = (long int) args->id;
+   args->min = vetor[id*(N/nthreads)];
+   args->max = vetor[id*(N/nthreads)];
    for(long int i = id*(N/nthreads); i<id*(N/nthreads)+(N/nthreads); i++){
        if(vetor[i] < args->min){
             args->min = vetor[i];
