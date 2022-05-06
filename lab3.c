@@ -13,7 +13,8 @@ typedef struct{
    float max; 
 } tArgs;
 
-/*Dividindo a Tarefa em nthreads blocos fa */
+/*Dividindo a Tarefa intercalando as threads pulando nthreads posicoes ate a proxima posiçao a ser checada no vetor dai são feitos
+os 2 testes para checar se ela é maior ou menor que todas as outras nesse bloco tid+n*nthreads */
 void *tarefa(void *arg) {
    tArgs *args = (tArgs*) arg;
    long int id = (long int) args->id;
@@ -85,7 +86,7 @@ int main(int argc, char* argv[]) {
         }
     } 
 
-    //espera as threads terminarem
+    //espera pelo termino da threads
     for(long int i=0; i<nthreads; i++) {
         pthread_join(*(tid+i), (void**)&resT);
         if(i == 0){
