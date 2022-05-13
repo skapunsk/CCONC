@@ -12,7 +12,7 @@ pthread_mutex_t mutex;
 //Inicializa o vetor com números aleatorios 
 void initVetor(int dim){
     for(int i=0; i<dim; i++){
-        int n = rand() / 100000;
+        int n = rand() + 1000000000;
         vetorEntrada[i] = n;    
     }
 
