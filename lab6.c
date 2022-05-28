@@ -1,8 +1,3 @@
-/* Disciplina: Computacao Concorrente */
-/* Prof.: Silvana Rossetto */
-/* Descricao: implementa  o problema dos leitores/escritores usando variaveis de condicao da biblioteca Pthread
-*/
-
 #include<pthread.h>
 #include<stdio.h>
 #include<stdlib.h>
@@ -14,6 +9,7 @@
 //variaveis do problema
 int leit=0; //contador de threads lendo
 int escr=0; //contador de threads escrevendo
+int escrW=0; // contador de threds de escrita esperando
 
 //variaveis para sincronizacao
 pthread_mutex_t mutex;
@@ -23,7 +19,7 @@ pthread_cond_t cond_leit, cond_escr;
 void InicLeit (int id) {
    pthread_mutex_lock(&mutex);
    printf("L[%d] quer ler\n", id);
-   while(escr > 0) {
+   while(escr > 0 || escrW > 0 ) {
      printf("L[%d] bloqueou\n", id);
      pthread_cond_wait(&cond_leit, &mutex);
      printf("L[%d] desbloqueou\n", id);
@@ -47,7 +43,9 @@ void InicEscr (int id) {
    printf("E[%d] quer escrever\n", id);
    while((leit>0) || (escr>0)) {
      printf("E[%d] bloqueou\n", id);
+     escrW++;
      pthread_cond_wait(&cond_escr, &mutex);
+     escrW--;
      printf("E[%d] desbloqueou\n", id);
    }
    escr++;
@@ -60,7 +58,7 @@ void FimEscr (int id) {
    printf("E[%d] terminou de escrever\n", id);
    escr--;
    pthread_cond_signal(&cond_escr);
-   pthread_cond_broadcast(&cond_leit);
+   if(escrW == 0)pthread_cond_broadcast(&cond_leit);
    pthread_mutex_unlock(&mutex);
 }
 
