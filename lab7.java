@@ -1,13 +1,13 @@
 import java.util.Random;
 
 //Classe da estrutura de dados (recurso) compartilhado entre as threads.
-class VetorInfos {
+class VetorC {
     private int vetor[];    //vetor de inteiros randomicos.
     public int dimVetor;    //dimensao do vetor de numeros inteiros.
     private int nParesC=0;  //quantidade de numeros pares no vetor checados concorrentemente.
 
     //construtor
-    public VetorInfos(int vetor[]) {
+    public VetorC(int vetor[]) {
         this.vetor = vetor;
         this.dimVetor = vetor.length;
     }
@@ -30,14 +30,14 @@ class T extends Thread{
     private int id; //identificador da thread
     private int NTHREADS;   //número de threads
     private int bloco;  //tamanho do bloco
-    private VetorInfos vetorInfos;  //objeto compartilhado entre as threads
+    private VetorC vetorC;  //objeto compartilhado entre as threads
 
     //construtor
-    public T(int id, int NTHREADS, int bloco, VetorInfos vetorInfos){
+    public T(int id, int NTHREADS, int bloco, VetorC vetorC){
         this.id = id;
         this.NTHREADS = NTHREADS;
         this.bloco = bloco;
-        this.vetorInfos = vetorInfos;
+        this.vetorC = vetorC;
     }
 
     //método main das threads
