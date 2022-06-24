@@ -117,8 +117,8 @@ class T2 extends Thread {
     try {
       for (;;) {
         this.monitor.EntraLeitor(this.id);
-        if(this.varGlobal.getVar() % 2 == 0) {System.out.println ("Variavel esta par\n");}
-        else {System.out.println("Variavel esta impar\n");}
+        if(this.varGlobal.getVar() % 2 == 0) {System.out.println ("Variavel esta par");}
+        else {System.out.println("Variavel esta impar");}
         this.monitor.SaiLeitor(this.id);
         sleep(this.delay); 
       }
@@ -148,7 +148,7 @@ class T3 extends Thread {
     try {
       for (;;) {
         this.monitor.EntraLeitor(this.id);
-        System.out.println ("A variavel esta com valor :"+this.varGlobal.getVar()+"\n");
+        System.out.println ("A variavel esta com o valor : "+this.varGlobal.getVar());
         this.monitor.SaiLeitor(this.id);
         sleep(this.delay);
         for (i=0; i<100000000; i++) {j=j/2;} // processamento significativo
