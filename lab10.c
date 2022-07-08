@@ -6,7 +6,7 @@
 
 
 #define L 10 //numero de threads leitoras
-#define E 2 //numero de threads escritoras
+#define E 4 //numero de threads escritoras
 
 int l = 0, e = 0; //contadores de threads lendo e escrevendo (globais)
 
